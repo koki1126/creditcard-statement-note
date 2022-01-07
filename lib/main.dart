@@ -13,6 +13,23 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false, //デバッグ表示のバナーをオフに
       home: Scaffold(
         body: MainPage(),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: null,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'home',
+            ),
+          ],
+        ),
       ),
     );
   }
