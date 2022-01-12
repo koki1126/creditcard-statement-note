@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'add_statement.dart';
+import 'package:flutter/services.dart';
 import 'main_page.dart';
 
 void main() {
+  //アプリを縦向きに固定
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   runApp(MyApp());
 }
 
