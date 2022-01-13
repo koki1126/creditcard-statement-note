@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'add_statement.dart';
 import 'package:flutter/services.dart';
 import 'main_page.dart';
+import 'edit_creditcard.dart';
 
 void main() {
   //アプリを縦向きに固定
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
         '/': (context) => MainPage(),
-        '/add_statement': (context) => AddStatement()
+        '/add_statement': (context) => AddStatement(),
+        '/edit_creditcard': (context) => EditCard(),
       },
     );
   }
