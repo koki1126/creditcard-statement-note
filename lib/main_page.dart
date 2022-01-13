@@ -1,64 +1,33 @@
 import 'package:flutter/material.dart';
+import 'edit_creditcard.dart';
+import 'total_page.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  var _selectedIndex = 0;
+  var _pages = <Widget>[
+    TotalPage(),
+    EditCard(),
+  ];
+  void _onTapItem(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //TODO ボディを切り分ける
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(
-                height: 30,
-              ),
-              Expanded(
-                flex: 1,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.lightBlue,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'hogehoge' + '円',
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                flex: 4,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.lime,
-                  ),
-                  child: ListView(
-                    children: [
-                      Text(
-                        'testdata',
-                        style: TextStyle(
-                          fontSize: 40,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      body: _pages[_selectedIndex],
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
+        tooltip: '明細を追加します',
         onPressed: () {
           print('pressed add button');
           Navigator.pushNamed(context, '/add_statement');
@@ -68,14 +37,18 @@ class MainPage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.credit_card),
-            label: 'カードを追加',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'home',
+            tooltip: 'test',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.credit_card),
+            label: 'カードを追加',
+            tooltip: 'クレジットカードを追加・編集します',
           ),
         ],
+        currentIndex: _selectedIndex,
+        onTap: _onTapItem,
       ),
     );
   }
