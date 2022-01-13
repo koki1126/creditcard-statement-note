@@ -1,0 +1,1 @@
+//ここにsharedpreferencesの設定をしていく
