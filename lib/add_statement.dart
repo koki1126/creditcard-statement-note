@@ -25,6 +25,7 @@ class AddStatement extends StatelessWidget {
               ),
               onPressed: () {
                 print('pressed 保存する');
+                Navigator.pop(context);
               },
               child: Text('保存する'),
             ),
