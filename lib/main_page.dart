@@ -44,101 +44,11 @@ class MainPage extends StatelessWidget {
                   child: ListView(
                     children: [
                       Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      Text(
-                        'test',
-                        style: TextStyle(fontSize: 24),
-                      ),
+                        'testdata',
+                        style: TextStyle(
+                          fontSize: 40,
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -150,6 +60,7 @@ class MainPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
+          print('pressed add button');
           Navigator.pushNamed(context, '/add_statement');
         },
       ),
@@ -157,8 +68,8 @@ class MainPage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'home',
+            icon: Icon(Icons.credit_card),
+            label: 'カードを追加',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
