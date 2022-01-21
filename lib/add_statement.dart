@@ -25,7 +25,6 @@ class AddStatement extends StatelessWidget {
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
@@ -52,21 +51,6 @@ class AddStatement extends StatelessWidget {
                 ),
               ),
             ),
-
-            // const CustomTextField(
-            //   labelText: 'カード名',
-            //   hintText: 'カード名を入力',
-            // ),
-            // const CustomTextField(
-            //   labelText: '金額',
-            //   hintText: '金額を入力',
-            //   keyboardType: TextInputType.number,
-            //   // TODO digit onlyにする
-            // ),
-            // const CustomTextField(
-            //   labelText: 'メモ',
-            //   hintText: '使った場所など(※必須)',
-            // ),
             TextButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.lime),
