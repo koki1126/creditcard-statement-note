@@ -31,7 +31,6 @@ void main() async {
     await db.insert(
       'creditcard_statement_note',
       creditcardStatement.toMap(),
-      //TODO conflictalgorithm
     );
   }
 
