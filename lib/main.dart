@@ -7,8 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_device_type/flutter_device_type.dart';
 
 void main() async {
-  //スマホだった場合縦向き固定
-  print(Device.get());
+  //スマホだった場合縦向き固定r
   if (Device.get().isTablet != true) {
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
