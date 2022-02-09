@@ -1,4 +1,8 @@
+import 'package:creditcard_statement_note/components/creditcard_statement_model.dart';
+import 'package:creditcard_statement_note/database_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:creditcard_statement_note/components/statement.dart';
+import 'components/statement.dart';
 
 class TotalPage extends StatelessWidget {
   const TotalPage({
@@ -20,7 +24,7 @@ class TotalPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.lightBlue,
+                  color: Colors.lime,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Center(
@@ -38,88 +42,12 @@ class TotalPage extends StatelessWidget {
             flex: 4,
             child: Container(
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Colors.lime,
               ),
               child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    child: Card(
-                      clipBehavior: Clip.antiAlias,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      child: Column(
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                color: Colors.orange,
-                                height: 60,
-                              ),
-                              const Positioned(
-                                bottom: 16,
-                                right: 16,
-                                left: 16,
-                                child: Text(
-                                  'Viewカード',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 24,
-                                  ),
-                                ),
-                              ),
-                              const Positioned(
-                                bottom: 16,
-                                right: 16,
-                                left: 200,
-                                child: Text(
-                                  '10,000円',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 24,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.all(16).copyWith(bottom: 0),
-                            child: const Text(
-                              'メモを表示します。',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          ButtonBar(
-                            alignment: MainAxisAlignment.start,
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: const Text('詳細'),
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.transparent,
-                                  elevation: 0,
-                                  onPrimary: Colors.blue,
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: const Text('編集'),
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.transparent,
-                                  elevation: 0,
-                                  onPrimary: Colors.blue,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  );
+                  return const Statement();
                 },
               ),
             ),
