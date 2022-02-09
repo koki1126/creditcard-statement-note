@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'components/creditcard_statement_model.dart';
 import 'dart:async';
@@ -18,12 +21,15 @@ class DatabaseHelper {
 
   //データベースを開く
   Future<dynamic> openDB() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, "creditcard_statement_note.db");
     final database = openDatabase(
-      join(await getDatabasesPath(), 'creditcard_statement_note'),
+      path,
+      // join(await getDatabasesPath(), 'creditcard_statement_note'),
       onCreate: (db, version) {
-        return db.execute(
-          'CREATE TABLE statements(id INTEGER PRIMARY KEY AUTOINCREMENT , cardName TEXT, price INTEGER, note TEXT)',
-        );
+        // return db.execute(
+        //   'CREATE TABLE statements(id TEXT PRIMARY KEY , cardName TEXT, price INTEGER, note TEXT)',
+        // );
       },
       version: 1,
     );
@@ -35,8 +41,10 @@ class DatabaseHelper {
     getDatabase;
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('statements');
+    print(maps);
     return List.generate(maps.length, (i) {
       return CreditcardStatement(
+        id: maps[i]['id'],
         cardName: maps[i]['cardName'],
         price: maps[i]['price'],
         note: maps[i]['note'],
@@ -54,6 +62,8 @@ class DatabaseHelper {
       creditcardStatement.toMap(),
     );
   }
+  // creditcardStatement.toMap(),
+  // );
 
   //削除
   Future<void> deleteCreditCardStatement(int id) async {
