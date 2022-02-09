@@ -4,11 +4,15 @@ import 'package:flutter/services.dart';
 import 'main_page.dart';
 import 'edit_creditcard.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 
 void main() async {
-  //アプリを縦向きに固定
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  //スマホだった場合縦向き固定
+  print(Device.get());
+  if (Device.get().isTablet != true) {
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
 
   runApp(const MyApp());
 }
