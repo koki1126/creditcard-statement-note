@@ -41,7 +41,7 @@ class TotalPage extends StatelessWidget {
                 color: Colors.white,
               ),
               child: ListView.builder(
-                itemCount: 3,
+                itemCount: 10,
                 itemBuilder: (BuildContext context, int index) {
                   return SizedBox(
                     child: Card(

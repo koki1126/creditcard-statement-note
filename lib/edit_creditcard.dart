@@ -5,7 +5,7 @@ class EditCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('クレジットカード編集画面'),
     );
   }
