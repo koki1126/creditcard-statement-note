@@ -1,14 +1,22 @@
-import 'package:creditcard_statement_note/components/creditcard_statement_model.dart';
 import 'package:creditcard_statement_note/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:creditcard_statement_note/components/statement.dart';
+import 'package:sqflite/sqlite_api.dart';
 import 'components/statement.dart';
+import 'database_helper.dart';
 
-class TotalPage extends StatelessWidget {
+class TotalPage extends StatefulWidget {
   const TotalPage({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<TotalPage> createState() => _TotalPageState();
+}
+
+DatabaseHelper databaseHelper = DatabaseHelper();
+
+class _TotalPageState extends State<TotalPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,7 +37,7 @@ class TotalPage extends StatelessWidget {
                 ),
                 child: const Center(
                   child: Text(
-                    '10,000円',
+                    'ここに合計金額を入れる',
                   ),
                 ),
               ),
@@ -40,17 +48,29 @@ class TotalPage extends StatelessWidget {
           ),
           Expanded(
             flex: 4,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.lime,
-              ),
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
-                  return const Statement();
-                },
-              ),
-            ),
+            //TODO StreamBuilderで書き換える
+            child: FutureBuilder<Object>(
+                future: databaseHelper.creditCardStatements(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.lime,
+                      ),
+                      child: ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          String cardName = snapshot.data[index].cardName;
+                          int price = snapshot.data[index].price;
+                          String note = snapshot.data[index].note;
+                          return Statement(cn: cardName, pr: price, nt: note);
+                        },
+                      ),
+                    );
+                  } else {
+                    return CircularProgressIndicator();
+                  }
+                }),
           ),
         ],
       ),

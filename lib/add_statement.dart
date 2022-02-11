@@ -17,6 +17,10 @@ class AddStatement extends StatelessWidget {
     String inputNote = '';
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('明細を追加する'),
+        backgroundColor: Colors.lightBlue,
+      ),
       backgroundColor: Colors.lightBlue,
       body: Center(
         child: Column(
@@ -100,7 +104,7 @@ class AddStatement extends StatelessWidget {
                     ),
                   );
                   print('保存しました');
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 } else {
                   //TODO 価格が入力されていないときにトーストを出す
                   print('価格を入力してください');

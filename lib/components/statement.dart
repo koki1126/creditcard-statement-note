@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Statement extends StatelessWidget {
-  const Statement({Key? key}) : super(key: key);
+  final String cn;
+  final int pr;
+  final String nt;
+
+  const Statement(
+      {required this.cn, required this.pr, required this.nt, Key? key})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,26 +25,26 @@ class Statement extends StatelessWidget {
                   color: Colors.orange,
                   height: 60,
                 ),
-                const Positioned(
+                Positioned(
                   bottom: 16,
                   right: 16,
                   left: 16,
                   child: Text(
-                    'Viewカード',
-                    style: TextStyle(
+                    cn,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontSize: 24,
                     ),
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   bottom: 16,
                   right: 16,
                   left: 200,
                   child: Text(
-                    '1000円',
-                    style: TextStyle(
+                    '$pr円',
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontSize: 24,
@@ -48,9 +55,9 @@ class Statement extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(16).copyWith(bottom: 0),
-              child: const Text(
-                'メモを表示します。',
-                style: TextStyle(fontSize: 16),
+              child: Text(
+                nt,
+                style: const TextStyle(fontSize: 16),
               ),
             ),
             ButtonBar(
