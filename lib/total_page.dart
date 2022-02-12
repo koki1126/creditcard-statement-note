@@ -1,3 +1,4 @@
+import 'package:creditcard_statement_note/components/creditcard_statement_model.dart';
 import 'package:creditcard_statement_note/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:creditcard_statement_note/components/statement.dart';
@@ -49,6 +50,7 @@ class _TotalPageState extends State<TotalPage> {
           Expanded(
             flex: 4,
             //TODO StreamBuilderで書き換える
+
             child: FutureBuilder<Object>(
                 future: databaseHelper.creditCardStatements(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
