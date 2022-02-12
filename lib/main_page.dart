@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'edit_creditcard.dart';
 import 'total_page.dart';
+import 'database_helper.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -22,15 +23,24 @@ class _MainPageState extends State<MainPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    Future(
+      () async {
+        await DatabaseHelper().openDB();
+      },
+    );
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_selectedIndex],
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         tooltip: '明細を追加します',
-        onPressed: () {
+        onPressed: () async {
           print('pressed add button');
-          Navigator.pushNamed(context, '/add_statement');
+          await Navigator.pushNamed(context, '/add_statement');
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

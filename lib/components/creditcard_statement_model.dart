@@ -1,14 +1,19 @@
 class CreditcardStatement {
+  final String id;
   final String cardName;
   final int price;
   final String note;
 
   CreditcardStatement(
-      {required this.cardName, required this.price, required this.note});
+      {required this.id,
+      required this.cardName,
+      required this.price,
+      required this.note});
 
   Map<String, dynamic> toMap() {
     return {
-      'cardName': cardName,
+      'id': id,
+      'cardName_id': cardName,
       'price': price,
       'note': note,
     };
@@ -16,6 +21,6 @@ class CreditcardStatement {
 
   @override
   String toString() {
-    return 'CreditcardStatement{cardName: $cardName, price: $price, note: $note}';
+    return 'CreditcardStatement{id:$id, cardName_id: $cardName, price: $price, note: $note}';
   }
 }

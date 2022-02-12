@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'kcustom_input_decoration.dart';
 import 'database_helper.dart';
+import 'package:uuid/uuid.dart';
+
+var uuid = const Uuid().v1();
 
 class AddStatement extends StatelessWidget {
   const AddStatement({Key? key}) : super(key: key);
@@ -14,6 +17,10 @@ class AddStatement extends StatelessWidget {
     String inputNote = '';
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('明細を追加する'),
+        backgroundColor: Colors.lightBlue,
+      ),
       backgroundColor: Colors.lightBlue,
       body: Center(
         child: Column(
@@ -71,25 +78,6 @@ class AddStatement extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                print('デバッグ用');
-                print(inputCardName);
-                print(inputPrice);
-                print(inputNote);
-                //テスト
-                DatabaseHelper().insertCreditCardStatement(
-                  CreditcardStatement(
-                    //TODO idをユニークなのが入るようにする
-                    cardName: inputCardName,
-                    price: inputPrice,
-                    note: inputNote,
-                  ),
-                );
-                print('保存しました');
-              },
-              child: const Text('確認用　保存'),
-            ),
-            TextButton(
-              onPressed: () {
                 print('出力します');
                 printStatement();
                 //TODO ここで出力する
@@ -104,8 +92,23 @@ class AddStatement extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                print('pressed 保存する');
-                Navigator.pop(context);
+                print('保存します');
+                if (inputPrice != 0) {
+                  var uuid = const Uuid().v1(); //ユニークなIDを作成する
+                  DatabaseHelper().insertCreditCardStatement(
+                    CreditcardStatement(
+                      id: uuid,
+                      cardName: inputCardName,
+                      price: inputPrice,
+                      note: inputNote,
+                    ),
+                  );
+                  print('保存しました');
+                  Navigator.pop(context, true);
+                } else {
+                  //TODO 価格が入力されていないときにトーストを出す
+                  print('価格を入力してください');
+                }
               },
               child: const Text('保存する'),
             ),

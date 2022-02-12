@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'components/creditcard_statement_model.dart';
 import 'dart:async';
+import 'migration_scripts.dart';
 
 class DatabaseHelper {
   dynamic database;
@@ -17,31 +21,38 @@ class DatabaseHelper {
   }
 
   //データベースを開く
-  Future<dynamic> openDB() async {
-    final database = openDatabase(
-      join(await getDatabasesPath(), 'creditcard_statement_note'),
-      onCreate: (db, version) {
-        return db.execute(
-          'CREATE TABLE statements(id INTEGER PRIMARY KEY AUTOINCREMENT , cardName TEXT, price INTEGER, note TEXT)',
-        );
+  openDB() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, "creditcard_statement_note.db");
+    database = openDatabase(
+      path,
+      version: migrationScripts.length,
+      onCreate: (Database db, int version) async {
+        for (int i = 1; i <= migrationScripts.length; i++) {
+          await db.execute(migrationScripts[i].toString());
+        }
       },
-      version: 1,
     );
     return database;
   }
 
   //取得
   Future<List<CreditcardStatement>> creditCardStatements() async {
-    getDatabase;
-    final db = await database;
+    final db = await getDatabase;
     final List<Map<String, dynamic>> maps = await db.query('statements');
-    return List.generate(maps.length, (i) {
-      return CreditcardStatement(
-        cardName: maps[i]['cardName'],
-        price: maps[i]['price'],
-        note: maps[i]['note'],
-      );
-    });
+
+    List<CreditcardStatement> statementList = List.generate(
+      maps.length,
+      (i) {
+        return CreditcardStatement(
+          id: maps[i]['id'],
+          cardName: maps[i]['cardName_id'],
+          price: maps[i]['price'],
+          note: maps[i]['note'],
+        );
+      },
+    );
+    return statementList;
   }
 
   // 挿入
@@ -54,6 +65,8 @@ class DatabaseHelper {
       creditcardStatement.toMap(),
     );
   }
+  // creditcardStatement.toMap(),
+  // );
 
   //削除
   Future<void> deleteCreditCardStatement(int id) async {
