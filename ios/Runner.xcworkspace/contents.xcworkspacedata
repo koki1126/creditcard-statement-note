@@ -2,9 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/koki/Desktop/creditcard_statement_note/ios/creditcard_statement_note.xcodeproj">
+      location = "group:/Users/koki/Desktop/creditcard_statement_note/ios/Runner.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Runner.xcodeproj">
    </FileRef>
 </Workspace>
