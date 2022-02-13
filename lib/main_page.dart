@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'edit_creditcard.dart';
-import 'total_page.dart';
+import 'home_page.dart';
 import 'database_helper.dart';
 
 class MainPage extends StatefulWidget {
