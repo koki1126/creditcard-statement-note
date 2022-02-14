@@ -15,7 +15,7 @@ class TotalPage extends StatefulWidget {
 }
 
 DatabaseHelper databaseHelper = DatabaseHelper();
-dynamic totalPrice = 45;
+dynamic totalPrice = 0;
 
 convertTotalPrice() async {
   totalPrice = await databaseHelper.calcCreditcatdStatements();
