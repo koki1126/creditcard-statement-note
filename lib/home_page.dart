@@ -1,10 +1,9 @@
-import 'package:creditcard_statement_note/components/creditcard_statement_model.dart';
 import 'package:creditcard_statement_note/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:creditcard_statement_note/components/statement.dart';
-import 'package:sqflite/sqlite_api.dart';
 import 'components/statement.dart';
 import 'database_helper.dart';
+import 'kconstant.dart';
 
 class TotalPage extends StatefulWidget {
   const TotalPage({
@@ -33,7 +32,8 @@ class _TotalPageState extends State<TotalPage> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.lime,
+                  // color: Colors.lime,
+                  color: kbackgroundColor2,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Center(
@@ -57,7 +57,8 @@ class _TotalPageState extends State<TotalPage> {
                   if (snapshot.hasData) {
                     return Container(
                       decoration: const BoxDecoration(
-                        color: Colors.lime,
+                        // color: Colors.lime,
+                        color: kbackgroundColor1,
                       ),
                       child: ListView.builder(
                         itemCount: snapshot.data.length,
