@@ -15,8 +15,19 @@ class TotalPage extends StatefulWidget {
 }
 
 DatabaseHelper databaseHelper = DatabaseHelper();
+dynamic totalPrice = 45;
+
+convertTotalPrice() async {
+  totalPrice = await databaseHelper.calcCreditcatdStatements();
+}
 
 class _TotalPageState extends State<TotalPage> {
+  @override
+  void initState() {
+    super.initState();
+    convertTotalPrice();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,9 +47,10 @@ class _TotalPageState extends State<TotalPage> {
                   color: kbackgroundColor2,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    'ここに合計金額を入れる',
+                    '$totalPrice円',
+                    style: const TextStyle(fontSize: 80),
                   ),
                 ),
               ),
@@ -50,7 +62,6 @@ class _TotalPageState extends State<TotalPage> {
           Expanded(
             flex: 4,
             //TODO StreamBuilderで書き換える
-
             child: FutureBuilder<Object>(
                 future: databaseHelper.creditCardStatements(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -71,7 +82,7 @@ class _TotalPageState extends State<TotalPage> {
                       ),
                     );
                   } else {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
                 }),
           ),

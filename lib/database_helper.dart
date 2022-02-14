@@ -55,6 +55,18 @@ class DatabaseHelper {
     return statementList;
   }
 
+  //合計金額を取得
+  Future<int> calcCreditcatdStatements() async {
+    int sum = 0;
+    final db = await getDatabase;
+    final List<Map<String, dynamic>> maps = await db.query('statements');
+    for (int i = 0; i < maps.length; i++) {
+      int price = maps[i]['price'];
+      sum = sum + price;
+    }
+    return sum;
+  }
+
   // 挿入
   Future<void> insertCreditCardStatement(
       CreditcardStatement creditcardStatement) async {
