@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'edit_creditcard.dart';
 import 'home_page.dart';
 import 'database_helper.dart';
+import 'kconstant.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -34,8 +35,10 @@ class _MainPageState extends State<MainPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kbackgroundColor1,
       body: _pages[_selectedIndex],
       floatingActionButton: FloatingActionButton(
+        backgroundColor: kbackgroundColor3,
         child: const Icon(Icons.add),
         tooltip: '明細を追加します',
         onPressed: () async {
@@ -45,6 +48,9 @@ class _MainPageState extends State<MainPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: kbackgroundColor3,
+        unselectedItemColor: Colors.grey[400],
+        backgroundColor: kbackgroundColor2,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

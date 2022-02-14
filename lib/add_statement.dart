@@ -2,7 +2,7 @@ import 'package:creditcard_statement_note/components/creditcard_statement_model.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'kcustom_input_decoration.dart';
+import 'kconstant.dart';
 import 'database_helper.dart';
 import 'package:uuid/uuid.dart';
 
@@ -45,6 +45,7 @@ class AddStatement extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
+                maxLength: 6,
                 onChanged: (value) {
                   inputPrice = int.parse(value);
                   print(inputPrice);
@@ -63,6 +64,7 @@ class AddStatement extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
+                maxLength: 25,
                 onChanged: (value) {
                   inputNote = value;
                   print(inputNote);
