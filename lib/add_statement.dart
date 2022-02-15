@@ -19,9 +19,9 @@ class AddStatement extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('明細を追加する'),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: kbackgroundColor1,
       ),
-      backgroundColor: Colors.lightBlue,
+      backgroundColor: kbackgroundColor1,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -79,16 +79,9 @@ class AddStatement extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {
-                print('出力します');
-                printStatement();
-                //TODO ここで出力する
-              },
-              child: const Text('確認用　出力'),
-            ),
-            TextButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.lime),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(kbackgroundColor2),
                 textStyle: MaterialStateProperty.all<TextStyle>(
                   const TextStyle(fontSize: 32),
                 ),
@@ -112,7 +105,12 @@ class AddStatement extends StatelessWidget {
                   print('価格を入力してください');
                 }
               },
-              child: const Text('保存する'),
+              child: const Text(
+                '保存する',
+                style: TextStyle(
+                  color: kbackgroundColor3,
+                ),
+              ),
             ),
           ],
         ),
