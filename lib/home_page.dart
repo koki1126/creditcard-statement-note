@@ -32,16 +32,6 @@ class _TotalPageState extends State<TotalPage> {
           const SizedBox(
             height: 30,
           ),
-          ElevatedButton(
-            onPressed: () async {
-              print('pressed add button');
-              final hoge = await Navigator.pushNamed(context, '/add_statement');
-              if (hoge == 1) {
-                setState(() {});
-              }
-            },
-            child: Text('aa'),
-          ),
           Expanded(
             flex: 1,
             child: Padding(
