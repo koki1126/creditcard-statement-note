@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:creditcard_statement_note/kconstant.dart';
 
 class Statement extends StatelessWidget {
+  final String id;
   final String cn;
   final int pr;
   final String nt;
 
   const Statement(
-      {required this.cn, required this.pr, required this.nt, Key? key})
+      {required this.id,
+      required this.cn,
+      required this.pr,
+      required this.nt,
+      Key? key})
       : super(key: key);
 
   @override
@@ -31,7 +35,7 @@ class Statement extends StatelessWidget {
                     child: Center(
                       child: Text(
                         cn,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -47,7 +51,7 @@ class Statement extends StatelessWidget {
                     child: Center(
                       child: Text(
                         '$pr円',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -68,66 +72,6 @@ class Statement extends StatelessWidget {
           ],
         ),
       ),
-      // child: Column(
-      //   children: [
-      //     Stack(
-      //       children: [
-      //         Container(
-      //           color: Colors.orange,
-      //           height: 40,
-      //         ),
-      //         Positioned(
-      //           bottom: 16,
-      //           right: 16,
-      //           left: 16,
-      //           child: Text(
-      //             cn,
-      //             style: const TextStyle(
-      //               fontWeight: FontWeight.bold,
-      //               color: Colors.white,
-      //               fontSize: 24,
-      //             ),
-      //           ),
-      //         ),
-      //         Positioned(
-      //           bottom: 16,
-      //           right: 16,
-      //           left: 200,
-      //           child: Text(
-      //             '$pr円',
-      //             style: const TextStyle(
-      //               fontWeight: FontWeight.bold,
-      //               color: Colors.white,
-      //               fontSize: 24,
-      //             ),
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //     Padding(
-      //       padding: const EdgeInsets.all(56).copyWith(bottom: 0),
-      //       child: Text(
-      //         nt,
-      //         style: const TextStyle(fontSize: 20),
-      //       ),
-      //     ),
-      //     ButtonBar(
-      //       alignment: MainAxisAlignment.start,
-      //       children: [
-      //         ElevatedButton(
-      //           onPressed: () {},
-      //           child: const Text('編集'),
-      //           style: ElevatedButton.styleFrom(
-      //             primary: Colors.transparent,
-      //             elevation: 0,
-      //             onPrimary: Colors.blue,
-      //           ),
-      //         ),
-      //       ],
-      //     )
-      //   ],
-      // ),
-      // ),
     );
   }
 }

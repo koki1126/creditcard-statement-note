@@ -78,10 +78,12 @@ class _TotalPageState extends State<TotalPage> {
                     child: ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
+                        String id = snapshot.data[index].id;
                         String cardName = snapshot.data[index].cardName;
                         int price = snapshot.data[index].price;
                         String note = snapshot.data[index].note;
-                        return Statement(cn: cardName, pr: price, nt: note);
+                        return Statement(
+                            id: id, cn: cardName, pr: price, nt: note);
                       },
                     ),
                   );
