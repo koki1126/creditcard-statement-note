@@ -10,7 +10,7 @@ var uuid = const Uuid().v1();
 
 class AddStatement extends StatelessWidget {
   AddStatement({Key? key}) : super(key: key);
-  DatabaseHelper databaseHelper = DatabaseHelper();
+  final DatabaseHelper databaseHelper = DatabaseHelper();
   @override
   Widget build(BuildContext context) {
     String inputCardName = '';
@@ -30,6 +30,7 @@ class AddStatement extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
+                textInputAction: TextInputAction.next,
                 onChanged: (value) {
                   inputCardName = value;
                   print(inputCardName);
@@ -46,6 +47,7 @@ class AddStatement extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
+                textInputAction: TextInputAction.next,
                 maxLength: 6,
                 onChanged: (value) {
                   inputPrice = int.parse(value);
@@ -65,6 +67,7 @@ class AddStatement extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
+                // textInputAction: TextInputAction.next,
                 maxLength: 25,
                 onChanged: (value) {
                   inputNote = value;
@@ -87,11 +90,11 @@ class AddStatement extends StatelessWidget {
                   const TextStyle(fontSize: 32),
                 ),
               ),
-              onPressed: () {
+              onPressed: () async {
                 print('保存します');
                 if (inputPrice != 0) {
                   var uuid = const Uuid().v1(); //ユニークなIDを作成する
-                  databaseHelper.insertCreditCardStatement(
+                  await databaseHelper.insertCreditCardStatement(
                     CreditcardStatement(
                       id: uuid,
                       cardName: inputCardName,
@@ -100,7 +103,7 @@ class AddStatement extends StatelessWidget {
                     ),
                   );
                   print('保存しました');
-                  Navigator.pop(context, true);
+                  Navigator.pushNamed(context, '/');
                 } else {
                   //TODO 価格が入力されていないときにトーストを出す
                   print('価格を入力してください');
