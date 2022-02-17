@@ -30,6 +30,7 @@ class AddStatement extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
+                textInputAction: TextInputAction.next,
                 onChanged: (value) {
                   inputCardName = value;
                   print(inputCardName);
@@ -46,6 +47,7 @@ class AddStatement extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
+                textInputAction: TextInputAction.next,
                 maxLength: 6,
                 onChanged: (value) {
                   inputPrice = int.parse(value);
@@ -65,6 +67,7 @@ class AddStatement extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
+                textInputAction: TextInputAction.next,
                 maxLength: 25,
                 onChanged: (value) {
                   inputNote = value;
