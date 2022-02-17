@@ -10,7 +10,7 @@ var uuid = const Uuid().v1();
 
 class AddStatement extends StatelessWidget {
   AddStatement({Key? key}) : super(key: key);
-  DatabaseHelper databaseHelper = DatabaseHelper();
+  final DatabaseHelper databaseHelper = DatabaseHelper();
   @override
   Widget build(BuildContext context) {
     String inputCardName = '';
