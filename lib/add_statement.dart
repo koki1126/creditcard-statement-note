@@ -67,7 +67,7 @@ class AddStatement extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
-                textInputAction: TextInputAction.next,
+                // textInputAction: TextInputAction.next,
                 maxLength: 25,
                 onChanged: (value) {
                   inputNote = value;
