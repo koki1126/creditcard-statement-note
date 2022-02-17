@@ -82,8 +82,15 @@ class _TotalPageState extends State<TotalPage> {
                         String cardName = snapshot.data[index].cardName;
                         int price = snapshot.data[index].price;
                         String note = snapshot.data[index].note;
-                        return Statement(
-                            id: id, cn: cardName, pr: price, nt: note);
+                        return Dismissible(
+                          key: ValueKey<String>(snapshot.data[index].id),
+                          background: Container(
+                            color: Colors.cyan,
+                            child: const Icon(Icons.wifi_tethering_rounded),
+                          ),
+                          child: Statement(
+                              id: id, cn: cardName, pr: price, nt: note),
+                        );
                       },
                     ),
                   );
