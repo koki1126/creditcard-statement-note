@@ -9,9 +9,7 @@ import 'package:uuid/uuid.dart';
 var uuid = const Uuid().v1();
 
 class AddStatement extends StatelessWidget {
-  AddStatement({Key? key}) : super(key: key);
-
-  final DatabaseHelper databaseHelper = DatabaseHelper();
+  const AddStatement({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     String inputCardName = '';
@@ -88,11 +86,11 @@ class AddStatement extends StatelessWidget {
                   const TextStyle(fontSize: 32),
                 ),
               ),
-              onPressed: () async {
+              onPressed: () {
                 print('保存します');
                 if (inputPrice != 0) {
                   var uuid = const Uuid().v1(); //ユニークなIDを作成する
-                  await databaseHelper.insertCreditCardStatement(
+                  DatabaseHelper().insertCreditCardStatement(
                     CreditcardStatement(
                       id: uuid,
                       cardName: inputCardName,
@@ -101,7 +99,7 @@ class AddStatement extends StatelessWidget {
                     ),
                   );
                   print('保存しました');
-                  Navigator.pushNamed(context, '/');
+                  Navigator.pop(context, true);
                 } else {
                   //TODO 価格が入力されていないときにトーストを出す
                   print('価格を入力してください');
