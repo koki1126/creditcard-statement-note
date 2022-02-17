@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
         '/': (context) => const MainPage(),
-        '/add_statement': (context) => const AddStatement(),
+        '/add_statement': (context) => AddStatement(),
         '/edit_creditcard': (context) => const EditCard(),
       },
     );
