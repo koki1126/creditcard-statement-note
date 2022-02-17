@@ -9,7 +9,8 @@ import 'package:uuid/uuid.dart';
 var uuid = const Uuid().v1();
 
 class AddStatement extends StatelessWidget {
-  const AddStatement({Key? key}) : super(key: key);
+  AddStatement({Key? key}) : super(key: key);
+  DatabaseHelper databaseHelper = DatabaseHelper();
   @override
   Widget build(BuildContext context) {
     String inputCardName = '';
@@ -90,7 +91,7 @@ class AddStatement extends StatelessWidget {
                 print('保存します');
                 if (inputPrice != 0) {
                   var uuid = const Uuid().v1(); //ユニークなIDを作成する
-                  DatabaseHelper().insertCreditCardStatement(
+                  databaseHelper.insertCreditCardStatement(
                     CreditcardStatement(
                       id: uuid,
                       cardName: inputCardName,
