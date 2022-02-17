@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:creditcard_statement_note/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:creditcard_statement_note/components/statement.dart';
@@ -65,7 +67,6 @@ class _TotalPageState extends State<TotalPage> {
           ),
           Expanded(
             flex: 4,
-            //TODO StreamBuilderで書き換える
             child: FutureBuilder<Object>(
               future: databaseHelper.creditCardStatements(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -83,10 +84,15 @@ class _TotalPageState extends State<TotalPage> {
                         int price = snapshot.data[index].price;
                         String note = snapshot.data[index].note;
                         return Dismissible(
-                          key: ValueKey<String>(snapshot.data[index].id),
+                          key: ValueKey<String>(
+                              snapshot.data[index].id), //ウィジェットを特定する
+                          onDismissed: (DismissDirection direction) async {
+                            await databaseHelper.deleteCreditCardStatement(id);
+                            setState(() {});
+                          },
                           background: Container(
-                            color: Colors.cyan,
-                            child: const Icon(Icons.wifi_tethering_rounded),
+                            color: kbackgroundColor1,
+                            child: const Icon(Icons.delete),
                           ),
                           child: Statement(
                               id: id, cn: cardName, pr: price, nt: note),
