@@ -81,7 +81,7 @@ class DatabaseHelper {
   // );
 
   //削除
-  Future<void> deleteCreditCardStatement(int id) async {
+  Future<void> deleteCreditCardStatement(String id) async {
     final db = await database;
     await db.delete(
       'statements',
