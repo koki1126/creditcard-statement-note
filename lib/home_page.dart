@@ -1,7 +1,6 @@
 import 'package:creditcard_statement_note/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:creditcard_statement_note/components/statement.dart';
-import 'components/statement.dart';
 import 'database_helper.dart';
 import 'kconstant.dart';
 
