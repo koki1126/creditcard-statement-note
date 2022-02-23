@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:creditcard_statement_note/components/statement.dart';
 import 'database_helper.dart';
 import 'kconstant.dart';
+import 'package:uuid/uuid.dart';
 
 class TotalPage extends StatefulWidget {
   const TotalPage({
@@ -13,9 +14,9 @@ class TotalPage extends StatefulWidget {
   State<TotalPage> createState() => _TotalPageState();
 }
 
-DatabaseHelper databaseHelper = DatabaseHelper();
-
 class _TotalPageState extends State<TotalPage> {
+  DatabaseHelper databaseHelper = DatabaseHelper();
+  String uuid = const Uuid().v1();
   @override
   void initState() {
     super.initState();
@@ -48,7 +49,7 @@ class _TotalPageState extends State<TotalPage> {
                       if (snapshot.hasData) {
                         return Text(
                           snapshot.data.toString(),
-                          style: TextStyle(fontSize: 80),
+                          style: const TextStyle(fontSize: 80),
                         );
                       } else {
                         return const CircularProgressIndicator();
