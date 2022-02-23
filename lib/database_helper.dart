@@ -1,11 +1,11 @@
 import 'dart:io';
-
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'components/creditcard_statement_model.dart';
 import 'dart:async';
 import 'migration_scripts.dart';
+import 'components/creditcard_model.dart';
 
 class DatabaseHelper {
   dynamic database;
@@ -77,8 +77,6 @@ class DatabaseHelper {
       creditcardStatement.toMap(),
     );
   }
-  // creditcardStatement.toMap(),
-  // );
 
   //削除
   Future<void> deleteCreditCardStatement(String id) async {
@@ -102,5 +100,30 @@ class DatabaseHelper {
     );
   }
 
-  //
+  //クレジット　挿入
+  Future<void> insertCreditCard(Creditcard creditcard) async {
+    getDatabase;
+    final db = await database;
+    await db.insert(
+      'cardName',
+      creditcard.toMap(),
+    );
+  }
+
+  //クレジット　取得
+  Future<List<Creditcard>> creditCardList() async {
+    final db = await getDatabase;
+    final List<Map<String, dynamic>> maps = await db.query('cardName');
+
+    List<Creditcard> creditCardList = List.generate(
+      maps.length,
+      (i) {
+        return Creditcard(
+          id: maps[i]['id'],
+          creditCardName: maps[i]['creditCardName'],
+        );
+      },
+    );
+    return creditCardList;
+  }
 }
