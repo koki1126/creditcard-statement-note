@@ -17,8 +17,8 @@ Map<int, String> migrationScripts = {
           INSERT INTO statements (id, cardName_id, price, note) VALUES
           ('defaultid', 'ここにカード名が表示されます', 0, '左右どちらかにスワイプで削除します')
       ''',
-  4: '''
-          INSERT INTO cardName (id, creditCardName) VALUES
-          ('defaultid_cardName', '楽天カード')
-      ''',
+  // 4: '''
+  //         INSERT INTO cardName (id, creditCardName) VALUES
+  //         ('defaultid_cardName', 'JCB card W')
+  //     ''',
 };
