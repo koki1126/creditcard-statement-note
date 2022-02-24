@@ -46,8 +46,8 @@ class _MainPageState extends State<MainPage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'home',
-            tooltip: 'test',
+            label: '合計',
+            tooltip: '合計を表示します',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
@@ -56,8 +56,8 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.credit_card),
-            label: 'カードを追加',
-            tooltip: 'クレジットカードを追加・編集します',
+            label: 'カード別',
+            tooltip: 'カード別の一覧・カードの編集',
           ),
         ],
         currentIndex: _selectedIndex,
