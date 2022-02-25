@@ -58,6 +58,7 @@ class _EditCardState extends State<EditCard> {
                 Expanded(
                   flex: 3,
                   child: TextField(
+                    maxLength: 15,
                     onChanged: (value) {
                       inputCardName = value;
                       print(value);

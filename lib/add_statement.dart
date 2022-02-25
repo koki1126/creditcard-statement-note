@@ -6,8 +6,6 @@ import 'kconstant.dart';
 import 'database_helper.dart';
 import 'package:uuid/uuid.dart';
 
-var uuid = const Uuid().v1();
-
 class AddStatement extends StatelessWidget {
   AddStatement({Key? key}) : super(key: key);
   final DatabaseHelper databaseHelper = DatabaseHelper();
