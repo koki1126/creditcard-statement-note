@@ -15,6 +15,7 @@ class EditCard extends StatefulWidget {
 class _EditCardState extends State<EditCard> {
   DatabaseHelper databaseHelper = DatabaseHelper();
   String? inputCardName;
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +59,7 @@ class _EditCardState extends State<EditCard> {
                 Expanded(
                   flex: 3,
                   child: TextField(
+                    controller: _controller,
                     maxLength: 15,
                     onChanged: (value) {
                       inputCardName = value;
@@ -81,7 +83,9 @@ class _EditCardState extends State<EditCard> {
                           ),
                         );
                         print('保存しました');
-                        setState(() {});
+                        setState(() {
+                          _controller.clear();
+                        });
                       }
                     },
                     child: Text(
