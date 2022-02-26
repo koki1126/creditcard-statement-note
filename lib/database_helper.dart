@@ -115,7 +115,7 @@ class DatabaseHelper {
     final db = await getDatabase;
     final List<Map<String, dynamic>> maps = await db.query('cardName');
 
-    List<Creditcard> creditCardList = List.generate(
+    List<Creditcard> creditCardList = List<Creditcard>.generate(
       maps.length,
       (i) {
         return Creditcard(
