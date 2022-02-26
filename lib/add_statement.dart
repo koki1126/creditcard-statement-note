@@ -1,3 +1,5 @@
+import 'package:creditcard_statement_note/components/creditcard.dart';
+import 'package:creditcard_statement_note/components/creditcard_model.dart';
 import 'package:creditcard_statement_note/components/creditcard_statement_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +8,42 @@ import 'kconstant.dart';
 import 'database_helper.dart';
 import 'package:uuid/uuid.dart';
 
-class AddStatement extends StatelessWidget {
+class AddStatement extends StatefulWidget {
   AddStatement({Key? key}) : super(key: key);
+
+  @override
+  State<AddStatement> createState() => _AddStatementState();
+}
+
+class _AddStatementState extends State<AddStatement> {
   final DatabaseHelper databaseHelper = DatabaseHelper();
+
+  int selectedIndex = 0;
+  List<Text> list = [];
+  List<String> cardList = [];
+  cardListText() {
+    for (int i = 0; i < cardList.length; i++) {
+      list.add(Text(cardList[i]));
+    }
+  }
+
+  insertCardList() async {
+    dynamic n = await databaseHelper.creditCardList();
+    for (int i = 0; i < n.length; i++) {
+      cardList.add(n[i].creditCardName);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('init state in add_statement');
+    insertCardList();
+    cardListText();
+  }
+
   @override
   Widget build(BuildContext context) {
-    String inputCardName = '';
     int inputPrice = 0;
     String inputNote = '';
 
@@ -25,21 +57,27 @@ class AddStatement extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: TextField(
-                textInputAction: TextInputAction.next,
-                onChanged: (value) {
-                  inputCardName = value;
-                  print(inputCardName);
+            SizedBox(
+              height: 100,
+              child: FutureBuilder(
+                future: databaseHelper.creditCardList(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: CupertinoPicker(
+                        itemExtent: 30,
+                        onSelectedItemChanged: (int value) {
+                          selectedIndex = value;
+                          print(selectedIndex);
+                        },
+                        //children: list,
+                        children: [
+                          for (int i = 0; i < cardList.length; i++) ...[
+                            Text(cardList[i])
+                          ]
+                        ]),
+                  );
                 },
-                decoration: const InputDecoration(
-                  labelText: 'カード名',
-                  hintText: 'カード名を入力する',
-                  enabledBorder: kCustomEnableBorder,
-                  focusedBorder: kCustomFocusedBorder,
-                  border: kCustomborder,
-                ),
               ),
             ),
             Padding(
@@ -89,13 +127,14 @@ class AddStatement extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
+                await databaseHelper.creditCardList().toString();
                 print('保存します');
                 if (inputPrice != 0) {
                   var uuid = const Uuid().v1(); //ユニークなIDを作成する
                   await databaseHelper.insertCreditCardStatement(
                     CreditcardStatement(
                       id: uuid,
-                      cardName: inputCardName,
+                      cardName: cardList[selectedIndex].toString(),
                       price: inputPrice,
                       note: inputNote,
                     ),
