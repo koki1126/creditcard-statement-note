@@ -20,7 +20,7 @@ class _AddStatementState extends State<AddStatement> {
 
   int selectedIndex = 0;
   List<Text> list = [];
-  List<String> cardList = [];
+  List<String> cardList = ['カードを選択します'];
   cardListText() {
     for (int i = 0; i < cardList.length; i++) {
       list.add(Text(cardList[i]));
@@ -129,7 +129,7 @@ class _AddStatementState extends State<AddStatement> {
               onPressed: () async {
                 await databaseHelper.creditCardList().toString();
                 print('保存します');
-                if (inputPrice != 0) {
+                if (inputPrice != 0 && selectedIndex != 0) {
                   var uuid = const Uuid().v1(); //ユニークなIDを作成する
                   await databaseHelper.insertCreditCardStatement(
                     CreditcardStatement(
@@ -142,8 +142,15 @@ class _AddStatementState extends State<AddStatement> {
                   print('保存しました');
                   Navigator.pushNamed(context, '/');
                 } else {
-                  //TODO 価格が入力されていないときにトーストを出す
-                  print('価格を入力してください');
+                  //以下のif文の表示を書く
+                  if (inputPrice == 0 && selectedIndex == 0) {
+                    print('価格を入力してください');
+                    print('カードを選択してください');
+                  } else if (inputPrice == 0) {
+                    print('価格を入力してください');
+                  } else {
+                    print('カードを選択してください');
+                  }
                 }
               },
               child: const Text(
