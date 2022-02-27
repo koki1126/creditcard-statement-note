@@ -19,6 +19,12 @@ class CreditcardStatement {
     };
   }
 
+  //外部からアクセスできるようにするためのもの
+  String get getId => id;
+  String get getCardName => cardName;
+  int get getPrice => price;
+  String get getNote => note;
+
   @override
   String toString() {
     return 'CreditcardStatement{id:$id, cardName_id: $cardName, price: $price, note: $note}';

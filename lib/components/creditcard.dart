@@ -1,20 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:creditcard_statement_note/database_helper.dart';
 
-class CreditCard extends StatelessWidget {
-  final String id;
+class CreditCard extends StatefulWidget {
   final String cardName;
   const CreditCard({
-    required this.id,
     required this.cardName,
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<CreditCard> createState() => _CreditCardState();
+}
+
+class _CreditCardState extends State<CreditCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      //TODO 比率をクレジットカードのように修正する
-      height: 200,
-      width: 150,
+      height: 100,
+      // width: 150,
       child: Card(
         color: Colors.grey[200],
         clipBehavior: Clip.antiAlias,
@@ -29,18 +33,25 @@ class CreditCard extends StatelessWidget {
                   child: Container(
                     height: 50,
                     color: Colors.lime,
+                    child: Center(child: Text(widget.cardName)),
                   ),
                 ),
                 Expanded(
                   child: Container(
                     height: 50,
                     color: Colors.amberAccent,
+                    child: const Center(
+                      child: const Text('合計金額を入れる'),
+                    ),
                   ),
-                )
+                ),
               ],
             ),
             Container(
               height: 59.5,
+              child: Center(
+                child: Text('ここに明細別のデータを入れる'),
+              ),
               // color: Colors.pink,
             ),
           ],
