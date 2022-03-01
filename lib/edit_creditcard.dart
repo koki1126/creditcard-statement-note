@@ -89,6 +89,7 @@ class _EditCardState extends State<EditCard> {
                       itemBuilder: (BuildContext context, int index) {
                         String creditCardName =
                             snapshot.data[index].creditCardName;
+                        String id = snapshot.data[index].id;
 
                         if (cardSumList[creditCardName] != null) {
                           return Padding(
@@ -152,7 +153,26 @@ class _EditCardState extends State<EditCard> {
                                 cardName: creditCardName,
                                 sumPrice: 0,
                                 child: Center(
-                                  child: Text('明細はありません'),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text('明細はありません'),
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            primary: kbackgroundColor2,
+                                          ),
+                                          onPressed: () async {
+                                            print('ボタンが押されました');
+                                            print(id);
+                                            await databaseHelper
+                                                .deleteCreditCardList(id);
+                                            setState(() {
+                                              print('setstateが発動');
+                                            });
+                                          },
+                                          child: Text('クレジットカードを削除します')),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
