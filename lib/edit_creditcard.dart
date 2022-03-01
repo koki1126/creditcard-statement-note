@@ -23,7 +23,7 @@ class _EditCardState extends State<EditCard> {
   void initState() {
     super.initState();
     print('init state in edit_creditcard');
-    calcsum();
+    getStatementData();
   }
 
   // カード毎の合計金額
@@ -32,7 +32,7 @@ class _EditCardState extends State<EditCard> {
   //カード毎の明細合計
   Map cardStatementList = {};
 
-  calcsum() async {
+  getStatementData() async {
     List n = await databaseHelper.creditCardStatements();
     //print(n);
 
@@ -87,15 +87,30 @@ class _EditCardState extends State<EditCard> {
                       itemBuilder: (BuildContext context, int index) {
                         String creditCardName =
                             snapshot.data[index].creditCardName;
-                        return Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Container(
-                            height: 200,
-                            child: CreditCard(
-                              cardName: creditCardName,
+
+                        if (cardSumList[creditCardName] != null) {
+                          return Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                              height: 200,
+                              child: CreditCard(
+                                cardName: creditCardName,
+                                sumPrice: cardSumList[creditCardName],
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          return Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Container(
+                              height: 200,
+                              child: CreditCard(
+                                cardName: creditCardName,
+                                sumPrice: 0,
+                              ),
+                            ),
+                          );
+                        }
                       },
                     ),
                   );
