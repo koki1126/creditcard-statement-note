@@ -104,7 +104,7 @@ class _AddStatementState extends State<AddStatement> {
               padding: const EdgeInsets.all(20.0),
               child: TextField(
                 // textInputAction: TextInputAction.next,
-                maxLength: 25,
+                maxLength: 20,
                 onChanged: (value) {
                   inputNote = value;
                   print(inputNote);
