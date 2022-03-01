@@ -126,4 +126,14 @@ class DatabaseHelper {
     );
     return creditCardList;
   }
+
+  //クレジット　削除
+  Future<void> deleteCreditCardList(String id) async {
+    final db = await database;
+    await db.delete(
+      'cardName',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }
