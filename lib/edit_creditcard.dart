@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:creditcard_statement_note/components/creditcard.dart';
 import 'package:creditcard_statement_note/database_helper.dart';
 import 'package:creditcard_statement_note/home_page.dart';
@@ -78,7 +80,7 @@ class _EditCardState extends State<EditCard> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return Container(
-                    height: 80,
+                    // height: 800,
                     decoration: const BoxDecoration(
                       color: kbackgroundColor1,
                     ),
@@ -96,6 +98,48 @@ class _EditCardState extends State<EditCard> {
                               child: CreditCard(
                                 cardName: creditCardName,
                                 sumPrice: cardSumList[creditCardName],
+                                child: ListView.builder(
+                                  itemCount:
+                                      cardStatementList[creditCardName].length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Container(
+                                        height: 20,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 4,
+                                              child: Center(
+                                                child: Text(
+                                                  cardStatementList[
+                                                              creditCardName]
+                                                          [index][0]
+                                                      .toString(),
+                                                  style:
+                                                      TextStyle(fontSize: 16),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Center(
+                                                child: Text(
+                                                  cardStatementList[
+                                                              creditCardName]
+                                                          [index][1]
+                                                      .toString(),
+                                                  style:
+                                                      TextStyle(fontSize: 16),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           );
@@ -107,6 +151,9 @@ class _EditCardState extends State<EditCard> {
                               child: CreditCard(
                                 cardName: creditCardName,
                                 sumPrice: 0,
+                                child: Center(
+                                  child: Text('明細はありません'),
+                                ),
                               ),
                             ),
                           );

@@ -4,8 +4,12 @@ import 'package:creditcard_statement_note/database_helper.dart';
 
 class CreditCard extends StatefulWidget {
   final String cardName;
+  final dynamic sumPrice;
+  final dynamic child;
   const CreditCard({
     required this.cardName,
+    required this.sumPrice,
+    required this.child,
     Key? key,
   }) : super(key: key);
 
@@ -17,7 +21,7 @@ class _CreditCardState extends State<CreditCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: 200,
       // width: 150,
       child: Card(
         color: Colors.grey[200],
@@ -40,19 +44,22 @@ class _CreditCardState extends State<CreditCard> {
                   child: Container(
                     height: 50,
                     color: Colors.amberAccent,
-                    child: const Center(
-                      child: const Text('合計金額を入れる'),
+                    child: Center(
+                      child: Text(widget.sumPrice.toString()),
                     ),
                   ),
                 ),
               ],
             ),
             Container(
-              height: 59.5,
+              height: 100,
               child: Center(
-                child: Text('ここに明細別のデータを入れる'),
+                child: widget.child,
               ),
-              // color: Colors.pink,
+            ),
+            Container(
+              height: 42,
+              color: Colors.pink,
             ),
           ],
         ),
