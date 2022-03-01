@@ -64,11 +64,13 @@ class Statement extends StatelessWidget {
             ),
             Container(
               height: 30,
-              // color: Colors.pink,
               child: Text(
                 nt,
                 textAlign: TextAlign.start,
               ),
+            ),
+            Container(
+              color: Colors.pink,
             ),
           ],
         ),
