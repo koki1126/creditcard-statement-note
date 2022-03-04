@@ -38,7 +38,6 @@ class _TotalPageState extends State<TotalPage> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                  // color: Colors.lime,
                   color: kbackgroundColor2,
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -48,7 +47,7 @@ class _TotalPageState extends State<TotalPage> {
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
                         return Text(
-                          snapshot.data.toString(),
+                          '${snapshot.data.toString()}円',
                           style: const TextStyle(fontSize: 80),
                         );
                       } else {
@@ -71,7 +70,6 @@ class _TotalPageState extends State<TotalPage> {
                 if (snapshot.hasData) {
                   return Container(
                     decoration: const BoxDecoration(
-                      // color: Colors.lime,
                       color: kbackgroundColor1,
                     ),
                     child: ListView.builder(
