@@ -21,6 +21,7 @@ class _EditCardState extends State<EditCard> {
   String? inputCardName;
   List statements = [];
   final TextEditingController _controller = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -80,7 +81,6 @@ class _EditCardState extends State<EditCard> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return Container(
-                    // height: 800,
                     decoration: const BoxDecoration(
                       color: kbackgroundColor1,
                     ),
@@ -113,13 +113,17 @@ class _EditCardState extends State<EditCard> {
                                             Expanded(
                                               flex: 4,
                                               child: Center(
-                                                child: Text(
-                                                  cardStatementList[
-                                                              creditCardName]
-                                                          [index][0]
-                                                      .toString(),
-                                                  style:
-                                                      TextStyle(fontSize: 16),
+                                                child: SingleChildScrollView(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  child: Text(
+                                                    cardStatementList[
+                                                                creditCardName]
+                                                            [index][0]
+                                                        .toString(),
+                                                    style:
+                                                        TextStyle(fontSize: 16),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -161,7 +165,8 @@ class _EditCardState extends State<EditCard> {
                                           style: ElevatedButton.styleFrom(
                                             primary: kbackgroundColor2,
                                           ),
-                                          onPressed: () async {
+                                          onPressed: null,
+                                          onLongPress: () async {
                                             print('ボタンが押されました');
                                             print(id);
                                             await databaseHelper
@@ -170,7 +175,8 @@ class _EditCardState extends State<EditCard> {
                                               print('setstateが発動');
                                             });
                                           },
-                                          child: Text('クレジットカードを削除します')),
+                                          child:
+                                              const Text('長押しでクレジットカードを削除します')),
                                     ],
                                   ),
                                 ),
@@ -217,9 +223,9 @@ class _EditCardState extends State<EditCard> {
                           ),
                         );
                         print('保存しました');
-                        setState(() {
-                          _controller.clear();
-                        });
+                        _controller.clear();
+                        inputCardName = null;
+                        setState(() {});
                       }
                     },
                     child: const Text(

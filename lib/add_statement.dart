@@ -21,12 +21,15 @@ class _AddStatementState extends State<AddStatement> {
   int selectedIndex = 0;
   List<Text> list = [];
   List<String> cardList = ['カードを選択します'];
+
+  //cupertinoPickerようにウィジェットに変換
   cardListText() {
     for (int i = 0; i < cardList.length; i++) {
       list.add(Text(cardList[i]));
     }
   }
 
+  //クレジットカードのリストを作成
   insertCardList() async {
     dynamic n = await databaseHelper.creditCardList();
     for (int i = 0; i < n.length; i++) {
@@ -44,7 +47,7 @@ class _AddStatementState extends State<AddStatement> {
 
   @override
   Widget build(BuildContext context) {
-    int inputPrice = 0;
+    int? inputPrice;
     String inputNote = '';
 
     return Scaffold(
@@ -70,7 +73,6 @@ class _AddStatementState extends State<AddStatement> {
                           selectedIndex = value;
                           print(selectedIndex);
                         },
-                        //children: list,
                         children: [
                           for (int i = 0; i < cardList.length; i++) ...[
                             Text(cardList[i])
@@ -86,8 +88,12 @@ class _AddStatementState extends State<AddStatement> {
                 textInputAction: TextInputAction.next,
                 maxLength: 6,
                 onChanged: (value) {
-                  inputPrice = int.parse(value);
-                  print(inputPrice);
+                  try {
+                    inputPrice = int.parse(value);
+                    print(inputPrice);
+                  } catch (e) {
+                    print('0桁になりました');
+                  }
                 },
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -103,8 +109,7 @@ class _AddStatementState extends State<AddStatement> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextField(
-                // textInputAction: TextInputAction.next,
-                maxLength: 20,
+                maxLength: 100,
                 onChanged: (value) {
                   inputNote = value;
                   print(inputNote);
@@ -135,7 +140,7 @@ class _AddStatementState extends State<AddStatement> {
                     CreditcardStatement(
                       id: uuid,
                       cardName: cardList[selectedIndex].toString(),
-                      price: inputPrice,
+                      price: inputPrice!,
                       note: inputNote,
                     ),
                   );
