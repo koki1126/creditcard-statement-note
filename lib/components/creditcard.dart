@@ -1,3 +1,4 @@
+import 'package:creditcard_statement_note/kconstant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:creditcard_statement_note/database_helper.dart';
@@ -36,30 +37,29 @@ class _CreditCardState extends State<CreditCard> {
                 Expanded(
                   child: Container(
                     height: 50,
-                    color: Colors.lime,
+                    color: kbackgroundColor2,
                     child: Center(child: Text(widget.cardName)),
                   ),
                 ),
                 Expanded(
                   child: Container(
                     height: 50,
-                    color: Colors.amberAccent,
+                    color: kbackgroundColor2,
                     child: Center(
-                      child: Text(widget.sumPrice.toString()),
+                      child: Text('${widget.sumPrice.toString()}円'),
                     ),
                   ),
                 ),
               ],
             ),
-            Container(
-              height: 100,
-              child: Center(
-                child: widget.child,
+            Expanded(
+              child: Container(
+                color: Colors.grey[200],
+                height: 142,
+                child: Center(
+                  child: widget.child,
+                ),
               ),
-            ),
-            Container(
-              height: 42,
-              color: Colors.pink,
             ),
           ],
         ),
