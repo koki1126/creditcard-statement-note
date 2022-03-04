@@ -1,4 +1,5 @@
 import 'package:creditcard_statement_note/components/creditcard.dart';
+import 'package:creditcard_statement_note/kconstant.dart';
 import 'package:flutter/material.dart';
 
 class Statement extends StatelessWidget {
@@ -32,13 +33,16 @@ class Statement extends StatelessWidget {
                   flex: 5,
                   child: Container(
                     height: 30,
-                    color: Colors.amberAccent,
+                    color: kbackgroundColor2,
                     child: Center(
-                      child: Text(
-                        cn,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Text(
+                          cn,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -48,7 +52,7 @@ class Statement extends StatelessWidget {
                   flex: 2,
                   child: Container(
                     height: 30,
-                    color: Colors.amber,
+                    color: kbackgroundColor2,
                     child: Center(
                       child: Text(
                         '$pr円',
@@ -64,13 +68,13 @@ class Statement extends StatelessWidget {
             ),
             Container(
               height: 30,
-              child: Text(
-                nt,
-                textAlign: TextAlign.start,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(
+                  nt,
+                  textAlign: TextAlign.start,
+                ),
               ),
-            ),
-            Container(
-              color: Colors.pink,
             ),
           ],
         ),
