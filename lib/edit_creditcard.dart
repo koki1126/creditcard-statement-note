@@ -1,8 +1,5 @@
-import 'dart:ffi';
-
 import 'package:creditcard_statement_note/components/creditcard.dart';
 import 'package:creditcard_statement_note/database_helper.dart';
-import 'package:creditcard_statement_note/home_page.dart';
 import 'package:creditcard_statement_note/kconstant.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';

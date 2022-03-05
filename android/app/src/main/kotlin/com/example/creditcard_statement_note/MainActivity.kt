@@ -1,4 +1,4 @@
-package com.example.creditcard_statement_note
+package com.koki.creditcard_statement_note
 
 import io.flutter.embedding.android.FlutterActivity
 

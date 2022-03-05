@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.creditcard_statement_note">
+    package="com.koki.creditcard_statement_note">
    <application
-        android:label="creditcard_statement_note"
+        android:label="クレジットカード明細記録"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

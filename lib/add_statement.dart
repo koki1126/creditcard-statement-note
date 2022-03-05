@@ -1,5 +1,3 @@
-import 'package:creditcard_statement_note/components/creditcard.dart';
-import 'package:creditcard_statement_note/components/creditcard_model.dart';
 import 'package:creditcard_statement_note/components/creditcard_statement_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
