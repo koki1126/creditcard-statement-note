@@ -11,12 +11,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   
   flutter_device_type: ^0.4.0
   path_provider: ^2.0.8
   sqflite: ^2.0.2
   cupertino_icons: ^1.0.2
   uuid: ^3.0.5
+  flutter_launcher_icons: ^0.9.2
+
+flutter_icons:
+  image_path: "lib/assets/icon.png" 
+  android: true
+  ios: true
 
 dev_dependencies:
   flutter_test:
