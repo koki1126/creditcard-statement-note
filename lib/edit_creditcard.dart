@@ -127,10 +127,7 @@ class _EditCardState extends State<EditCard> {
                                             Expanded(
                                               child: Center(
                                                 child: Text(
-                                                  cardStatementList[
-                                                              creditCardName]
-                                                          [index][1]
-                                                      .toString(),
+                                                  '${cardStatementList[creditCardName][index][1].toString()}円',
                                                   style:
                                                       TextStyle(fontSize: 16),
                                                 ),
