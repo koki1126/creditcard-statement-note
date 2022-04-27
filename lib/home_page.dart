@@ -48,7 +48,7 @@ class _TotalPageState extends State<TotalPage> {
                       if (snapshot.hasData) {
                         return Text(
                           '${snapshot.data.toString()}円',
-                          style: const TextStyle(fontSize: 80),
+                          style: const TextStyle(fontSize: 60),
                         );
                       } else {
                         return const CircularProgressIndicator();
