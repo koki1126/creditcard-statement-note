@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'kconstant.dart';
 import 'database_helper.dart';
 import 'package:uuid/uuid.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddStatement extends StatefulWidget {
   AddStatement({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _AddStatementState extends State<AddStatement> {
     for (int i = 0; i < cardList.length; i++) {
       list.add(Text(cardList[i]));
     }
+    if (cardList.length == 1) {}
   }
 
   //クレジットカードのリストを作成
@@ -32,6 +34,17 @@ class _AddStatementState extends State<AddStatement> {
     dynamic n = await databaseHelper.creditCardList();
     for (int i = 0; i < n.length; i++) {
       cardList.add(n[i].creditCardName);
+    }
+    if (cardList.length == 1) {
+      Fluttertoast.showToast(
+        msg: 'クレジットカードを追加してください',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     }
   }
 
@@ -132,7 +145,9 @@ class _AddStatementState extends State<AddStatement> {
               onPressed: () async {
                 await databaseHelper.creditCardList().toString();
                 print('保存します');
-                if (inputPrice != 0 && selectedIndex != 0) {
+
+                if (inputPrice != null && selectedIndex != 0) {
+                  //価格入力○ カード選択○ の場合
                   var uuid = const Uuid().v1(); //ユニークなIDを作成する
                   await databaseHelper.insertCreditCardStatement(
                     CreditcardStatement(
@@ -144,16 +159,39 @@ class _AddStatementState extends State<AddStatement> {
                   );
                   print('保存しました');
                   Navigator.pushNamed(context, '/');
+                } else if (inputPrice != null && selectedIndex == 0) {
+                  //価格入力○ カード選択✗ の場合
+                  Fluttertoast.showToast(
+                    msg: 'カードを選択してください',
+                    toastLength: Toast.LENGTH_LONG,
+                    gravity: ToastGravity.CENTER,
+                    // timeInSecForIosWeb: 3,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                  );
+                } else if (inputPrice == null && selectedIndex != 0) {
+                  //価格入力✗ カード選択○ の場合
+                  Fluttertoast.showToast(
+                    msg: '価格を入力してください',
+                    toastLength: Toast.LENGTH_LONG,
+                    gravity: ToastGravity.CENTER,
+                    // timeInSecForIosWeb: 3,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                  );
                 } else {
-                  //以下のif文の表示を書く
-                  if (inputPrice == 0 && selectedIndex == 0) {
-                    print('価格を入力してください');
-                    print('カードを選択してください');
-                  } else if (inputPrice == 0) {
-                    print('価格を入力してください');
-                  } else {
-                    print('カードを選択してください');
-                  }
+                  //価格入力✗ カード選択✗ の場合
+                  Fluttertoast.showToast(
+                    msg: 'カードを選択して価格を入力してください',
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    // timeInSecForIosWeb: 3,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                  );
                 }
               },
               child: const Text(
