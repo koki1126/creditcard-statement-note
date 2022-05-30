@@ -63,7 +63,12 @@ class _AddStatementState extends State<AddStatement> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('明細を追加する'),
+        title: const Text(
+          '明細を追加する',
+          style: TextStyle(
+            color: kbackgroundColor3,
+          ),
+        ),
         backgroundColor: kbackgroundColor1,
       ),
       backgroundColor: kbackgroundColor1,
