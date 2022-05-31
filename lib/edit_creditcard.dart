@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'components/creditcard_model.dart';
 import 'components/creditcard_statement_model.dart';
+import 'kconstant.dart';
 
 class EditCard extends StatefulWidget {
   const EditCard({Key? key}) : super(key: key);
@@ -199,6 +200,16 @@ class _EditCardState extends State<EditCard> {
                       inputCardName = value;
                       print(value);
                     },
+                    decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: kbackgroundColor3),
+                      hintText: '登録するカード名を入力してください',
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: kbackgroundColor2),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: kbackgroundColor2),
+                      ),
+                    ),
                   ),
                 ),
                 Expanded(
@@ -223,7 +234,7 @@ class _EditCardState extends State<EditCard> {
                       }
                     },
                     child: const Text(
-                      '追加する',
+                      '登録する',
                     ),
                   ),
                 ),
