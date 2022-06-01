@@ -6,6 +6,7 @@ import 'package:uuid/uuid.dart';
 import 'components/creditcard_model.dart';
 import 'components/creditcard_statement_model.dart';
 import 'kconstant.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class EditCard extends StatefulWidget {
   const EditCard({Key? key}) : super(key: key);
@@ -231,6 +232,16 @@ class _EditCardState extends State<EditCard> {
                         _controller.clear();
                         inputCardName = null;
                         setState(() {});
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: 'カード名を入力後に登録ボタンを押してください',
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          // timeInSecForIosWeb: 3,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
                       }
                     },
                     child: const Text(
