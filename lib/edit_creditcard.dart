@@ -2,6 +2,7 @@ import 'package:creditcard_statement_note/components/creditcard.dart';
 import 'package:creditcard_statement_note/database_helper.dart';
 import 'package:creditcard_statement_note/kconstant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
 import 'components/creditcard_model.dart';
 import 'components/creditcard_statement_model.dart';
@@ -190,66 +191,72 @@ class _EditCardState extends State<EditCard> {
             ),
           ),
           Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: TextField(
-                    controller: _controller,
-                    maxLength: 15,
-                    onChanged: (value) {
-                      inputCardName = value;
-                      print(value);
-                    },
-                    decoration: const InputDecoration(
-                      labelStyle: TextStyle(color: kbackgroundColor3),
-                      hintText: '登録するカード名を入力してください',
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: kbackgroundColor2),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: kbackgroundColor2),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: TextField(
+                      controller: _controller,
+                      maxLength: 15,
+                      onChanged: (value) {
+                        inputCardName = value;
+                        print(value);
+                      },
+                      decoration: const InputDecoration(
+                        labelStyle: TextStyle(color: kbackgroundColor3),
+                        hintText: 'カード名を入力してください',
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: kbackgroundColor2),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: kbackgroundColor2),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: kbackgroundColor3,
-                    ),
-                    onPressed: () async {
-                      print('inputCardName:[$inputCardName]保存ボタンを押したよ');
-                      if (inputCardName != null) {
-                        String uuid = const Uuid().v1();
-                        await databaseHelper.insertCreditCard(
-                          Creditcard(
-                            id: uuid,
-                            creditCardName: inputCardName!,
-                          ),
-                        );
-                        print('保存しました');
-                        _controller.clear();
-                        inputCardName = null;
-                        setState(() {});
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: 'カード名を入力後に登録ボタンを押してください',
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.CENTER,
-                          // timeInSecForIosWeb: 3,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                      }
-                    },
-                    child: const Text(
-                      '登録する',
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: kbackgroundColor3,
+                      ),
+                      onPressed: () async {
+                        print('inputCardName:[$inputCardName]保存ボタンを押したよ');
+                        if (inputCardName != null) {
+                          String uuid = const Uuid().v1();
+                          await databaseHelper.insertCreditCard(
+                            Creditcard(
+                              id: uuid,
+                              creditCardName: inputCardName!,
+                            ),
+                          );
+                          print('保存しました');
+                          _controller.clear();
+                          inputCardName = null;
+                          setState(() {});
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: 'カード名を入力後に登録ボタンを押してください',
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.CENTER,
+                            // timeInSecForIosWeb: 3,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                        }
+                      },
+                      child: const Text(
+                        '登録する',
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           // Expanded(
