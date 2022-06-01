@@ -152,7 +152,7 @@ class _AddStatementState extends State<AddStatement> {
                 print('保存します');
 
                 if (inputPrice != null && selectedIndex != 0) {
-                  //価格入力○ カード選択○ の場合
+                  //金額入力○ カード選択○ の場合
                   var uuid = const Uuid().v1(); //ユニークなIDを作成する
                   await databaseHelper.insertCreditCardStatement(
                     CreditcardStatement(
@@ -165,7 +165,7 @@ class _AddStatementState extends State<AddStatement> {
                   print('保存しました');
                   Navigator.pushNamed(context, '/');
                 } else if (inputPrice != null && selectedIndex == 0) {
-                  //価格入力○ カード選択✗ の場合
+                  //金額入力○ カード選択✗ の場合
                   Fluttertoast.showToast(
                     msg: 'カードを選択してください',
                     toastLength: Toast.LENGTH_LONG,
@@ -176,9 +176,9 @@ class _AddStatementState extends State<AddStatement> {
                     fontSize: 16.0,
                   );
                 } else if (inputPrice == null && selectedIndex != 0) {
-                  //価格入力✗ カード選択○ の場合
+                  //金額入力✗ カード選択○ の場合
                   Fluttertoast.showToast(
-                    msg: '価格を入力してください',
+                    msg: '金額を入力してください',
                     toastLength: Toast.LENGTH_LONG,
                     gravity: ToastGravity.CENTER,
                     // timeInSecForIosWeb: 3,
@@ -187,9 +187,9 @@ class _AddStatementState extends State<AddStatement> {
                     fontSize: 16.0,
                   );
                 } else {
-                  //価格入力✗ カード選択✗ の場合
+                  //金額入力✗ カード選択✗ の場合
                   Fluttertoast.showToast(
-                    msg: 'カードを選択して価格を入力してください',
+                    msg: 'カードを選択して金額を入力してください',
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.CENTER,
                     // timeInSecForIosWeb: 3,
