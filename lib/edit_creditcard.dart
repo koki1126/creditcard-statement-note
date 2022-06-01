@@ -2,6 +2,7 @@ import 'package:creditcard_statement_note/components/creditcard.dart';
 import 'package:creditcard_statement_note/database_helper.dart';
 import 'package:creditcard_statement_note/kconstant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:uuid/uuid.dart';
 import 'components/creditcard_model.dart';
 import 'components/creditcard_statement_model.dart';
@@ -70,195 +71,207 @@ class _EditCardState extends State<EditCard> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          Expanded(
-            flex: 10,
-            child: FutureBuilder<Object>(
-              future: databaseHelper.creditCardList(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  return Container(
-                    decoration: const BoxDecoration(
-                      color: kbackgroundColor1,
-                    ),
-                    child: ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        String creditCardName =
-                            snapshot.data[index].creditCardName;
-                        String id = snapshot.data[index].id;
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              flex: 10,
+              child: FutureBuilder<Object>(
+                future: databaseHelper.creditCardList(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return Container(
+                      decoration: const BoxDecoration(
+                        color: kbackgroundColor1,
+                      ),
+                      child: ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          String creditCardName =
+                              snapshot.data[index].creditCardName;
+                          String id = snapshot.data[index].id;
 
-                        if (cardSumList[creditCardName] != null) {
-                          return Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              height: 200,
-                              child: CreditCard(
-                                cardName: creditCardName,
-                                sumPrice: cardSumList[creditCardName],
-                                child: ListView.builder(
-                                  itemCount:
-                                      cardStatementList[creditCardName].length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: Container(
-                                        height: 20,
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 4,
-                                              child: Center(
-                                                child: SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
+                          if (cardSumList[creditCardName] != null) {
+                            return Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Container(
+                                height: 200,
+                                child: CreditCard(
+                                  cardName: creditCardName,
+                                  sumPrice: cardSumList[creditCardName],
+                                  child: ListView.builder(
+                                    itemCount: cardStatementList[creditCardName]
+                                        .length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Container(
+                                          height: 20,
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 4,
+                                                child: Center(
+                                                  child: SingleChildScrollView(
+                                                    scrollDirection:
+                                                        Axis.horizontal,
+                                                    child: Text(
+                                                      cardStatementList[
+                                                                  creditCardName]
+                                                              [index][0]
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 16),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Center(
                                                   child: Text(
-                                                    cardStatementList[
-                                                                creditCardName]
-                                                            [index][0]
-                                                        .toString(),
+                                                    '${cardStatementList[creditCardName][index][1].toString()}円',
                                                     style:
                                                         TextStyle(fontSize: 16),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            Expanded(
-                                              child: Center(
-                                                child: Text(
-                                                  '${cardStatementList[creditCardName][index][1].toString()}円',
-                                                  style:
-                                                      TextStyle(fontSize: 16),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                          );
-                        } else {
-                          return Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              height: 200,
-                              child: CreditCard(
-                                cardName: creditCardName,
-                                sumPrice: 0,
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text('明細はありません'),
-                                      ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            primary: kbackgroundColor2,
+                                            ],
                                           ),
-                                          onPressed: null,
-                                          onLongPress: () async {
-                                            print('ボタンが押されました');
-                                            print(id);
-                                            await databaseHelper
-                                                .deleteCreditCardList(id);
-                                            setState(() {
-                                              print('setstateが発動');
-                                            });
-                                          },
-                                          child:
-                                              const Text('長押しでクレジットカードを削除します')),
-                                    ],
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  );
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              },
+                            );
+                          } else {
+                            return Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Container(
+                                height: 200,
+                                child: CreditCard(
+                                  cardName: creditCardName,
+                                  sumPrice: 0,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text('明細はありません'),
+                                        ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: kbackgroundColor2,
+                                            ),
+                                            onPressed: null,
+                                            onLongPress: () async {
+                                              print('ボタンが押されました');
+                                              print(id);
+                                              await databaseHelper
+                                                  .deleteCreditCardList(id);
+                                              setState(() {
+                                                print('setstateが発動');
+                                              });
+                                            },
+                                            child: const Text(
+                                                '長押しでクレジットカードを削除します')),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
+              ),
             ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: TextField(
-                    controller: _controller,
-                    maxLength: 15,
-                    onChanged: (value) {
-                      inputCardName = value;
-                      print(value);
-                    },
-                    decoration: const InputDecoration(
-                      labelStyle: TextStyle(color: kbackgroundColor3),
-                      hintText: '登録するカード名を入力してください',
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: kbackgroundColor2),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: kbackgroundColor2),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: kbackgroundColor3,
-                    ),
-                    onPressed: () async {
-                      print('inputCardName:[$inputCardName]保存ボタンを押したよ');
-                      if (inputCardName != null) {
-                        String uuid = const Uuid().v1();
-                        await databaseHelper.insertCreditCard(
-                          Creditcard(
-                            id: uuid,
-                            creditCardName: inputCardName!,
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: TextField(
+                        controller: _controller,
+                        maxLength: 15,
+                        onChanged: (value) {
+                          inputCardName = value;
+                          print(value);
+                        },
+                        decoration: const InputDecoration(
+                          labelStyle: TextStyle(color: kbackgroundColor3),
+                          hintText: 'カード名を入力してください',
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: kbackgroundColor2),
                           ),
-                        );
-                        print('保存しました');
-                        _controller.clear();
-                        inputCardName = null;
-                        setState(() {});
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: 'カード名を入力後に登録ボタンを押してください',
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.CENTER,
-                          // timeInSecForIosWeb: 3,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                      }
-                    },
-                    child: const Text(
-                      '登録する',
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: kbackgroundColor2),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: kbackgroundColor3,
+                        ),
+                        onPressed: () async {
+                          print('inputCardName:[$inputCardName]保存ボタンを押したよ');
+                          if (inputCardName != null) {
+                            String uuid = const Uuid().v1();
+                            await databaseHelper.insertCreditCard(
+                              Creditcard(
+                                id: uuid,
+                                creditCardName: inputCardName!,
+                              ),
+                            );
+                            print('保存しました');
+                            _controller.clear();
+                            inputCardName = null;
+                            setState(() {});
+                          } else {
+                            Fluttertoast.showToast(
+                              msg: 'カード名を入力後に登録ボタンを押してください',
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.CENTER,
+                              // timeInSecForIosWeb: 3,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
+                          }
+                        },
+                        child: const Text(
+                          '登録する',
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-          // Expanded(
-          //   child: SizedBox(
-          //     height: 30,
-          //     child: Text('ここに広告を入れる'),
-          //   ),
-          // ),
-        ],
+            // Expanded(
+            //   child: SizedBox(
+            //     height: 30,
+            //     child: Text('ここに広告を入れる'),
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }
