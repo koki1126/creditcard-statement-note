@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none'
 
-//android版を書き出す際にバージョンを上げる
+# android版を書き出す際にバージョンを上げる
 version: 1.0.2+3
 
 environment:
