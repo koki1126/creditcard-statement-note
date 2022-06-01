@@ -2,7 +2,9 @@ name: creditcard_statement_note
 description: A new Flutter project.
 
 publish_to: 'none'
-version: 1.0.1+2
+
+//android版を書き出す際にバージョンを上げる
+version: 1.0.2+3
 
 environment:
   sdk: ">=2.14.0 <3.0.0"
