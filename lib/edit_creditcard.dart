@@ -245,7 +245,7 @@ class _EditCardState extends State<EditCard> {
                             setState(() {});
                           } else {
                             Fluttertoast.showToast(
-                              msg: 'カード名を入力後に登録ボタンを押してください',
+                              msg: 'カード名を入力してください',
                               toastLength: Toast.LENGTH_LONG,
                               gravity: ToastGravity.CENTER,
                               // timeInSecForIosWeb: 3,
