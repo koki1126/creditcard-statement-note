@@ -2,12 +2,11 @@ import 'package:creditcard_statement_note/components/creditcard.dart';
 import 'package:creditcard_statement_note/database_helper.dart';
 import 'package:creditcard_statement_note/kconstant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uuid/uuid.dart';
+
 import 'components/creditcard_model.dart';
 import 'components/creditcard_statement_model.dart';
-import 'kconstant.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class EditCard extends StatefulWidget {
   const EditCard({Key? key}) : super(key: key);
@@ -98,7 +97,7 @@ class _EditCardState extends State<EditCard> {
                           if (cardSumList[creditCardName] != null) {
                             return Padding(
                               padding: const EdgeInsets.all(16.0),
-                              child: Container(
+                              child: SizedBox(
                                 height: 200,
                                 child: CreditCard(
                                   cardName: creditCardName,
@@ -110,7 +109,7 @@ class _EditCardState extends State<EditCard> {
                                         (BuildContext context, int index) {
                                       return Padding(
                                         padding: const EdgeInsets.all(4.0),
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 20,
                                           child: Row(
                                             children: [
@@ -125,7 +124,7 @@ class _EditCardState extends State<EditCard> {
                                                                   creditCardName]
                                                               [index][0]
                                                           .toString(),
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           fontSize: 16),
                                                     ),
                                                   ),
@@ -135,8 +134,8 @@ class _EditCardState extends State<EditCard> {
                                                 child: Center(
                                                   child: Text(
                                                     '${cardStatementList[creditCardName][index][1].toString()}円',
-                                                    style:
-                                                        TextStyle(fontSize: 16),
+                                                    style: const TextStyle(
+                                                        fontSize: 16),
                                                   ),
                                                 ),
                                               ),
@@ -152,7 +151,7 @@ class _EditCardState extends State<EditCard> {
                           } else {
                             return Padding(
                               padding: const EdgeInsets.all(16.0),
-                              child: Container(
+                              child: SizedBox(
                                 height: 200,
                                 child: CreditCard(
                                   cardName: creditCardName,
@@ -162,10 +161,10 @@ class _EditCardState extends State<EditCard> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Text('明細はありません'),
+                                        const Text('明細はありません'),
                                         ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              primary: kbackgroundColor2,
+                                              backgroundColor: Colors.black,
                                             ),
                                             onPressed: null,
                                             onLongPress: () async {
@@ -197,7 +196,7 @@ class _EditCardState extends State<EditCard> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                 child: Row(
                   children: [
                     Expanded(
@@ -227,7 +226,7 @@ class _EditCardState extends State<EditCard> {
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: kbackgroundColor3,
+                          backgroundColor: Colors.black,
                         ),
                         onPressed: () async {
                           print('inputCardName:[$inputCardName]保存ボタンを押したよ');
