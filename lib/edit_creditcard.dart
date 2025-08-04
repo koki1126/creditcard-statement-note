@@ -165,8 +165,11 @@ class _EditCardState extends State<EditCard> {
                                         ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor: Colors.black,
+                                              foregroundColor: Colors.white,
                                             ),
-                                            onPressed: null,
+                                            onPressed: () {
+                                              // Empty function to keep button enabled for styling
+                                            },
                                             onLongPress: () async {
                                               print('ボタンが押されました');
                                               print(id);
@@ -227,6 +230,7 @@ class _EditCardState extends State<EditCard> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
+                          foregroundColor: Colors.white,
                         ),
                         onPressed: () async {
                           print('inputCardName:[$inputCardName]保存ボタンを押したよ');
