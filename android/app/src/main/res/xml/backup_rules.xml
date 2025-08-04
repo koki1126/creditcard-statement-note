@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+   Backup rules for credit card statement app
+   See https://developer.android.com/guide/topics/data/autobackup
+   for details.
+-->
+<full-backup-content>
+    <!-- Exclude all data for security reasons -->
+    <exclude domain="root" />
+    <exclude domain="file" />
+    <exclude domain="database" />
+    <exclude domain="sharedpref" />
+    <exclude domain="external" />
+</full-backup-content>
