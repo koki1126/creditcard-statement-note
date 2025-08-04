@@ -1,5 +1,53 @@
 # Android 15 (API Level 35) Upgrade Summary
 
+## Quick Fix for Java/Gradle Compatibility Issues
+
+⚠️ **If you encounter "Unsupported class file major version 65" or similar errors:**
+
+### Problem
+The error occurs when old Gradle cache files (from version 6.7) conflict with newer Java versions, especially Java 21 (class file major version 65).
+
+### Solution Steps
+
+1. **Clear Gradle caches** (recommended first step):
+   ```bash
+   # On macOS/Linux:
+   rm -rf ~/.gradle/caches
+   rm -rf ~/.gradle/wrapper
+   
+   # On Windows:
+   rmdir /s %USERPROFILE%\.gradle\caches
+   rmdir /s %USERPROFILE%\.gradle\wrapper
+   ```
+
+2. **Regenerate Gradle wrapper** (if needed):
+   ```bash
+   cd android
+   gradle wrapper --gradle-version 8.8
+   ```
+
+3. **Use compatible Java version**:
+   - **Java 17**: Works with Gradle 7.3+ ✅
+   - **Java 21**: Works with Gradle 8.5+ ✅
+   
+   Check your Java version: `java -version`
+
+4. **Verify build works**:
+   ```bash
+   cd android
+   ./gradlew build
+   # OR use system gradle:
+   gradle build
+   ```
+
+### Java/Gradle Compatibility Reference
+| Java Version | Minimum Gradle Version | Recommended |
+|--------------|-------------------------|-------------|
+| Java 17      | 7.3                    | 8.5+        |
+| Java 21      | 8.5                    | 8.8+        |
+
+---
+
 ## Changes Made
 
 This update brings the app into compliance with Google Play's requirement to target Android 15 (API level 35) by August 31, 2025.
@@ -12,12 +60,13 @@ This update brings the app into compliance with Google Play's requirement to tar
 
 2. **Build Tool Upgrades**: 
    - **Android Gradle Plugin**: 4.1.0 → 8.0.2
-   - **Gradle**: 6.7 → 8.5
+   - **Gradle**: 6.7 → 8.8 (updated for better Java 21 support)
    - **Kotlin**: 1.6.21 → 1.8.22
 
 3. **Performance & Compatibility**:
    - Increased JVM memory allocation: 1536M → 2048M
    - Made Flutter SDK path optional in settings.gradle
+   - Added proper Gradle wrapper scripts (gradlew/gradlew.bat)
 
 4. **Android Manifest Fixes**:
    - Added `android:exported="true"` to MainActivity (required for API 31+)
