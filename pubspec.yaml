@@ -4,7 +4,7 @@ description: A new Flutter project.
 publish_to: "none"
 
 # リリースビルド作成時にバージョンを上げる(x.x.x(バージョン名)+x(ビルド番号))
-version: 1.0.2+3
+version: 1.0.2+4
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
