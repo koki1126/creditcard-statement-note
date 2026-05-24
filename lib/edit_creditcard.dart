@@ -9,7 +9,7 @@ import 'components/creditcard_model.dart';
 import 'components/creditcard_statement_model.dart';
 
 class EditCard extends StatefulWidget {
-  const EditCard({Key? key}) : super(key: key);
+  const EditCard({super.key});
 
   @override
   State<EditCard> createState() => _EditCardState();
@@ -163,21 +163,24 @@ class _EditCardState extends State<EditCard> {
                                       children: [
                                         const Text('明細はありません'),
                                         ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.black,
-                                            ),
-                                            onPressed: null,
-                                            onLongPress: () async {
-                                              print('ボタンが押されました');
-                                              print(id);
-                                              await databaseHelper
-                                                  .deleteCreditCardList(id);
-                                              setState(() {
-                                                print('setstateが発動');
-                                              });
-                                            },
-                                            child: const Text(
-                                                '長押しでクレジットカードを削除します')),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.black,
+                                          ),
+                                          onPressed: null,
+                                          onLongPress: () async {
+                                            print('ボタンが押されました');
+                                            print(id);
+                                            await databaseHelper
+                                                .deleteCreditCardList(id);
+                                            setState(() {
+                                              print('setstateが発動');
+                                            });
+                                          },
+                                          child: const Text(
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                              '長押しでクレジットカードを削除します'),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -255,6 +258,9 @@ class _EditCardState extends State<EditCard> {
                           }
                         },
                         child: const Text(
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                           '登録する',
                         ),
                       ),
